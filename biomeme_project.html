@@ -2,51 +2,140 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="biomeme_project.css"/>
-   <link rel="icon" href="biomemeicon-mobile_1x.png" type="image/x-icon">
-   <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  <script rel="text/javascript" src="biomeme_project.js"> </script>
+  <link href='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.css' rel='stylesheet' />
+  <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+    </style>
+  <link rel="icon" href="biomemeicon-mobile_1x.png" type="image/x-icon">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous">
+  </script>
+  <script rel="text/javascript" src="biomeme_project.js"></script>
+  <script src='https://api.mapbox.com/mapbox-gl-js/v0.37.0/mapbox-gl.js'></script>
+
   <meta charset="utf-8"/>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <!-- is this the right type of linking for JQuery??? -->
   <title>
     MPB
   </title>
 </head>
+
+
 <body>
-<header class="container1">
-  <h1> Masterman Project at Biomeme </h1>
-</header>
-<div class="container3">
-<div class="mapbox">
-<!-- leaving the mapbox alone for now because I haven't
-linked it yet to this code and also because I have no idea what to do with it -->
-</div>
+  <header class="container1">
+    <h1> Masterman Project at Biomeme </h1>
+  </header>
+  <style>
+    .mapboxgl-popup {
+        max-width: 400px;
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+  </style>
+  <div id='map'></div>
+  <script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoic2tlcnI5MyIsImEiOiJjajNib3o5ODkwMDB2MnFvN3poMjloNjkwIn0.ZCt1-iFVcc04I8fsTAIQrA';
+
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v9',
+      center: [-75.15862782492782, 39.95051333218808],
+      zoom: 11.15
+  });
+
+  map.on('load', function () {
+
+      map.addSource("earthquakes", {
+          type: "geojson",
+          // Point to GeoJSON data. This example visualizes all M1.0+ earthquakes
+          // from 12/22/15 to 1/21/16 as logged by USGS' Earthquake hazards program.
+          data: {
+              "type": "FeatureCollection",
+              "features": [{
+                  "type": "Feature",
+                  "properties": {
+                      "description": "<img src=\"images/1/IMG_0872.JPG\" /><table><tr><td>CQ</td><td>34.54</td></tr></table>",
+                      "icon": "circle",
+                      "cq": 30.025,
+                      "concentration": "high"
+                  },
+                  "geometry": {
+                      "type": "Point",
+                      "coordinates": [-75.15862782492782, 39.95051333218808]
+                  }
+              }]
+          },
+      });
+      // Add a layer showing the places.
+    map.addLayer({
+      "id": "places",
+      "type": "symbol",
+      "source": "earthquakes",
+      "layout": {
+          "icon-image": "{icon}-11",
+          "icon-allow-overlap": true
+      }
+    });
+
+    map.addLayer({
+         "id": "high-concentration",
+         "type": "circle",
+         "source": "earthquakes",
+         "paint": {
+             "circle-color": 'red',
+             "circle-radius": 70,
+             "circle-blur": 1 // blur the circles to get a heatmap look
+         },
+         "filter": ["==", "concentration", "high"]
+     });
+
+      // When a click event occurs on a feature in the places layer, open a popup at the
+      // location of the feature, with description HTML from its properties.
+      map.on('click', 'places', function (e) {
+          new mapboxgl.Popup()
+              .setLngLat(e.features[0].geometry.coordinates)
+              .setHTML(e.features[0].properties.description)
+              .addTo(map);
+      });
+
+      // Change the cursor to a pointer when the mouse is over the places layer.
+      map.on('mouseenter', 'places', function () {
+          map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Change it back to a pointer when it leaves.
+      map.on('mouseleave', 'places', function () {
+          map.getCanvas().style.cursor = '';
+      });
+  });
+  </script>
 <div class="container4">
-<div class="interactive1">
-  <button id="button1">
-    <p id="low"> LOW </p>
-  </button>
-  <button id="button2">
-    <p id="medium"> MEDIUM </p>
-  </button>
-  <button id="button3">
-    <p id="high"> HIGH </p>
-</div>
-<div class="slider"> </div>
-<div class="interactive2">
-  <button id="button5">
-    <p id="sewage"> Overlay of Sewage Outflow </p>
-  </button>
-  <button id="button6">
-    <p id="storm"> Overlay of Storm Draining </p>
-  </button>
-</div>
-</div>
-<div class="information">
-  <p id="text"> this is some information </p>
-</div>
+  <div class="interactive1">
+    <button id="button1">
+      <p id="low"> LOW </p>
+    </button>
+    <button id="button2">
+      <p id="medium"> MEDIUM </p>
+    </button>
+    <button id="button3">
+      <p id="high"> HIGH </p>
+  </div>
+    <div class="slider"> </div>
+    <div class="interactive2">
+      <button id="button5">
+        <p id="sewage"> Overlay of Sewage Outflow </p>
+      </button>
+      <button id="button6">
+        <p id="storm"> Overlay of Storm Draining </p>
+      </button>
+    </div>
+  </div>
+  <div class="information">
+    <p id="text"> this is some information </p>
+  </div>
 </div>
 
 </div>

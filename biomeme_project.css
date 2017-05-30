@@ -1,0 +1,215 @@
+title {
+
+}
+
+header {
+  background-color: transparent;
+  position: top;
+}
+body {
+  background-color: transparent;
+
+  /* this isn't even the right color */
+}
+
+
+ h1 {
+  font-size: 30px;
+  font-style: normal;
+  font-family: "Optima", sans-serif;
+  color: white;
+  text-align: left;
+  margin-left: 50px;
+
+}
+
+h2 {
+  font-size: 15px;
+  font-style: normal;
+  font-family: "Optima", sans-serif;
+  color: black;
+  text-align: left;
+  margin-left: auto;
+}
+
+div {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: right;
+  padding: 10px;
+}
+button {
+  display: inline-block;
+  border-radius: 12px;
+}
+
+.container1 {
+  background-color: #1d384b;
+  height: 100px;
+  border: 1px solid #1d384b;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  border-radius: 10px;
+
+}
+.container2 {
+  position: relative;
+  top: 10px;
+  left: 20px;
+}
+
+.container3 {
+  display: inline-flex;
+  width: 1280px;
+  border: 1px solid #CCC;
+  height: 1000px;
+  margin: 100px auto;
+}
+
+.container4 {
+  display: inline-grid;
+}
+
+.mapbox {
+  position: left;
+  background-color: blue;
+  height: 700px;
+  width: 700px;
+  padding: 10px;
+
+}
+
+.interactive1 {
+  background-color: transparent;
+  margin-top: 10px;
+  position: right;
+  float: right;
+
+}
+
+.interactive2 {
+  background-color: transparent;
+  margin: 0px;
+  position: right;
+}
+
+
+.information {
+
+}
+
+p {
+  font-size: 10px;
+  font-family: "Optima", sans-serif;
+  text-align: auto;
+  color: white;
+}
+
+.slider {
+  background-color: blue;
+  height: 50px;
+  width: 400px;
+  margin: 0px;
+}
+
+#low {
+
+}
+
+#medium {
+
+}
+
+#high {
+
+}
+
+#slider {
+  /* i think i'm going to have to get rid of this later,
+  depending on whether or not i'm just going to make a bunch of buttons */
+}
+
+
+#button1 {
+  height: 50px;
+  width: 100px;
+  background-color: #1d384b;
+  margin-left: center;
+  margin-right: center;
+  shape-margin: center;
+  float: center;
+  padding: 10px;
+}
+/*
+.button1:hover {
+    background-color: #1d384b;
+    -webkit-transition-duration: 700ms;
+    -moz-transition-duration: 700ms;
+    -o-transition-duration: 700ms;
+    transition-duration: 700ms;
+    cursor: pointer;
+    color: white;
+
+}
+*/
+#text {
+  color: #1d384b;
+  font-size: 15px;
+}
+
+#low {
+
+}
+
+#medium {
+
+}
+
+#high {
+
+}
+
+#button2 {
+  height:50px;
+  width: 100px;
+  background-color: #1d384b;
+  margin-left: center;
+  margin-right: center;
+  shape-margin: center;
+  float: center;
+  padding: 10px;
+}
+
+#button3 {
+  height: 50px;
+  width: 100px;
+  background-color: #1d384b;
+  margin-left: center;
+  margin-right: center;
+  shape-margin: center;
+  float: center;
+  padding: 10px;
+}
+
+#button5 {
+  height: 50px;
+  width: 100px;
+  background-color: #1d384b;
+  margin-left: center;
+  margin-right: left;
+  shape-margin: center;
+  float: center;
+  padding: 10px;
+}
+
+#button6 {
+  height: 50px;
+  width: 100px;
+  background-color: #1d384b;
+  margin-left: center;
+  margin-right: right;
+  shape-margin: center;
+  float: center;
+  padding: 10px;
+}
